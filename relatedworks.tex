@@ -2,7 +2,13 @@
 \label{sec:relatedworks}
 
 \subsection{Deterministic decoding}
-\cite{DVFS}  predicts the amount of computational work per each incoming frame on ARM processor.
+\cite{MPEG} MPEG terminology. \term{I-frame}, \term{P-frame}, \term{B-frame}. (from DVFS 2.2). 
+The authors empirically studied the relationship between the decoding time and the data size of each frame.  (from DVFS 2.3). 
+
+\cite{DVFS}  predicts the amount of computational workload of ARM processor based on the type of each incoming frame.
+IDCT and Reconstruction take more than half of CPU time. 
+IDCT is CPU intensive and its computation time is dependent on frmae type.
+
 
 \subsection{Side channel attack on process information}
 \cite{MEMENTO} and more citations show a process without admin privilege can monitor other process' information through \term{proc}. 
