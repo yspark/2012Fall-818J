@@ -1,8 +1,7 @@
 \section{Related Works}
 \label{sec:relatedworks}
 
-\cite{MPEGPredict}\cite{DVFS} indicate that MPEG\cite{MPEG} decoding does not consume a constant processing time, mainly because of the facts that 1) a given MPEG video stream contains different frame types and 2) there exists wide variations in changes between frames. 
-
+\cite{Bavier98predictingmpeg}\cite{DVFS} indicate that MPEG\cite{MPEG} decoding does not consume a constant processing time, mainly because of the facts that 1) a given MPEG video stream contains different frame types and 2) there exists wide variations in changes between frames. 
 
 \cite{MPEG} MPEG terminology. \term{I-frame}, \term{P-frame}, \term{B-frame}. (from DVFS 2.2). 
 The authors empirically studied the relationship between the decoding time and the data size of each frame.  (from DVFS 2.3). 
@@ -10,6 +9,8 @@ The authors empirically studied the relationship between the decoding time and t
 \cite{DVFS}  predicts the amount of computational workload of ARM processor based on the type of each incoming frame.
 IDCT and Reconstruction take more than half of CPU time. 
 IDCT is CPU intensive and its computation time is dependent on frmae type.
+
+
 
 \cite{MEMENTO} and more citations show a process without admin privilege can monitor other process' information through \term{proc}. 
 
