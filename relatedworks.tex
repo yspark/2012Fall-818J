@@ -1,6 +1,18 @@
 \section{Related Works}
 \label{sec:relatedworks}
 
+\cite{Zhang:2009} is the first to indicate that security-sensitive information can be revealed by standard Unix \term{proc} file system. 
+The attack in this work takes advantage of the stack information of a target process contained in the proc file system. 
+The authors focus on the correlation between the system call of a target process and its ESP (stack pointer) values. 
+They show that from the ESP content, a keystroke event can be identified if they trigger system calls and 	
+
+
+\cite{jana:memento} exploits the dynamics of memory footprints, that is, sequences of snapshots of the target program's data resident size (DRS).
+Those works exploits the fact that any adversary 
+
+
+%%%
+
 \cite{Bavier98predictingmpeg}\cite{DVFS} indicate that MPEG\cite{MPEG} decoding does not consume a constant processing time, mainly because of the facts that 1) a given MPEG video stream contains different frame types and 2) there exists wide variations in changes between frames. 
 
 \cite{MPEG} MPEG terminology. \term{I-frame}, \term{P-frame}, \term{B-frame}. (from DVFS 2.2). 
@@ -10,13 +22,6 @@ The authors empirically studied the relationship between the decoding time and t
 IDCT and Reconstruction take more than half of CPU time. 
 IDCT is CPU intensive and its computation time is dependent on frmae type.
 
-
-
-\cite{Zhang:2009} is the first to indicate that security-sensitive information can be revealed by standard Unix \term{proc} file system. 
-The authors focus on the correlation between the program's system call and its ESP (stack pointer) value for keystroke sniffing, 
-
-while \ciet{jana:memento} exploits the dynamics of memory footprints, that is, sequences of snapshots of the target program's data resident size (DRS).
-Those works exploits the fact that any adversary 
 
 and more citations show a process without admin privilege can monitor other process' information through \term{proc}. 
 
