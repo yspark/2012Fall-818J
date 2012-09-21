@@ -4,14 +4,26 @@
 \cite{Zhang:2009} is the first to indicate that security-sensitive information can be revealed by standard Unix \term{proc} file system. 
 The attack in this work takes advantage of the stack information of a target process contained in the proc file system. 
 The authors focus on the correlation between the system call of a target process and its ESP (stack pointer) values. 
-They show that from the ESP content, a keystroke event can be identified if they trigger system calls and 	
+They show that from a keystroke event can be identified the ESP content if they trigger system calls.
+Then they perform timing attack to infer the characters the victim input. 
+Our work also exploits silimar side-channel. 
+In our work, we use the standard Unix commands, \term{ps} or \term{top}, in order to measure the dynamics of CPU usage of a victim's process. 
+An adversary is able to use those command to get information of other processes, such as process ID, CPU usage or memory usage, without any permission 
+
+\cite{jana:memento} is also motivated by the fact that the proc file system can reveal security-sensitive information of other process. 
+The authos exploit the dynamics of memory footprints, that is, sequences of snapshots of the target program's data resident size (DRS).
+By monitoring a memory footprints of victim's web brower process, they can infer which site the victim has visited. 
+Further they extended the attack onto Android platform, where any Android app can use the standart Unix proc facility without any permission or phone owner's consent. 
+
+\cite{Saponas07devicesthat} shows the study of \term{Slingbox}\cite{slingbox}, one of the next-generation wireless video multimedia systems for the home. 
+The authors predict the content that is being transferred on Slingbox network by monitoring the transfer rate at which multimedia data is being sent from one device to the other. 
+They take advantage of the facts that variable bit rate encoding is widely used for network efficiency and each multimedia content has unique throughput trace. 
+However, it has one crucial limitation: Only Slingbox traffic should exist on the network so that the throughput of Slingbox content can be measured exactly. 
+Our work does not have this limitation since we are targeting a specific application process such as Netflix app.
+Even if a victim is running multiple processes on his device, we can target a specific process and get CPU usage statistics. 
 
 
-\cite{jana:memento} exploits the dynamics of memory footprints, that is, sequences of snapshots of the target program's data resident size (DRS).
-Those works exploits the fact that any adversary 
-
-
-%%%
+\begin{comment}
 
 \cite{Bavier98predictingmpeg}\cite{DVFS} indicate that MPEG\cite{MPEG} decoding does not consume a constant processing time, mainly because of the facts that 1) a given MPEG video stream contains different frame types and 2) there exists wide variations in changes between frames. 
 
@@ -28,3 +40,5 @@ and more citations show a process without admin privilege can monitor other proc
 shows CPU usage pattern can be used for side-channel attack. 
 
 shows a person's preference on movies can reveal sensitive information such as ....
+
+\end{comment}
