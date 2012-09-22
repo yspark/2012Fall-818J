@@ -4,7 +4,7 @@
 \cite{Zhang:2009} is the first to indicate that security-sensitive information can be revealed by standard Unix \term{proc} file system. 
 The attack in this work takes advantage of the stack information of a target process contained in the proc file system. 
 The authors focus on the correlation between the system call of the target process and its ESP (stack pointer) values. 
-They show that from a keystroke event can be identified the ESP content if they trigger system calls.
+They show that a keystroke event can be identified from the ESP content if they trigger system calls.
 Then, they perform the timing attack to infer the characters the victim input. 
 Our work also exploits the similar side-channel. 
 In our work, we use the standard Unix commands, \term{ps} or \term{top}, in order to measure the dynamics of CPU usage of a victim's process. 
