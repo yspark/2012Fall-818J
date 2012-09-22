@@ -1,21 +1,21 @@
 \section{Background}
 \label{sec:background}
 \subsection{MPEG decoding}
-We first give a brief overview of MPEG decoding and describe how each MPEG video stream show different CPU usage statistics pattern. 
+We first give a brief overview of MPEG decoding and describe how each MPEG video stream shows different CPU usage statistics patterns. 
 
-The MPEG video stream consists of a sequence of still images, that is, frames. 
-Each frame is defined as one of three frame types: \term{I-frame} (intrapicture), \term{B-frame} (bidirectional predicted picture) or \term{P-frame} (Predicted picture).
-I-frames are self-contained, complete images.  
-So any other frames are not necessary to decode I-frame.
+An MPEG video stream consists of a sequence of still images, that is, frames. 
+Each frame is defined as one of three frame types: \term{I-frame} (intrapicture), \term{P-frame} (Predicted picture) or \term{B-frame} (bidirectional predicted picture).
+I-frame is self-contained, complete images.  
+Thus, no other frames are needed to decode I-frame.
 On the other hand, P-frame contains the changes in the image from the previous I-frame or P-frame so it has smaller size than I-frame.
-B-frame has even smaller size than B-frame since it uses the difference between previous and contains the difference between the previous and the next I-frame or P-frame. 
+B-frame has an even smaller size than B-frame since it refers a previous and a next I-frame or P-frame, and contains the difference between the previous and the next I-frame or P-frame. 
 Overall, I-frames are also most expensive to decode since it involves the computationally expensive \term{Discrete Cosine Transform (DCT)}.
-Since each MPEG video stream may have different \term{Group of Pictures (GOP)}, that is, a sequence of frames, they are likely to have different CPU usage patterns. 
+Since each MPEG video stream may have different \term{Group of Pictures (GOP)}, that is, a sequence of frames, GOPs are likely to have different CPU usage patterns. 
 
-When MPEG video stream is encoded VBR, different parts in the video stream may require different processing times, mainly due to different data size of P-frame and B-frame. 
-The size of P-frame or B-frame is highly variable since they contain only delta information, that is, the difference to the previous or the surrounding I-frames or P-frames.
-In case of stationary scene, the difference between consecutive frames rarely exists. 
-Therefore, data size of P-frame and B-frame can be minimized and therefore less processing time is demanded to decode. 
-On the contrary, in case of action scene where most parts of the image are changing very rapidly, there exists huge difference between consecutive frames. 
-Therefore, P-frame and B-frame should contain relatively larger data and more processing time is required to decode.
-Since each video stream consists of various types of scenes and the constitution of the scenes are also different from each other, CPU usage statistics of each video stream also shows different pattern. 
+When an MPEG video stream is encoded at VBR, different parts in the video stream may require different processing times, mainly due to different data size of P-frame and B-frame. 
+The size of P-frame or B-frame is highly variable since they contain only delta information which is the difference from their reference frames i.e. the previous or the surrounding I-frames or P-frames.
+In case of a stationary scene, the difference between consecutive frames rarely exists. 
+Therefore, the size of P-frame and B-frame can be minimized and, therefore, a less processing time is required to decode the frames.
+On the contrary, in case of an action scene where most parts of the image are changing very rapidly, there exists huge difference between consecutive frames.
+Therefore, P-frame and B-frame should contain relatively larger data and a more processing time is required to decode.
+Since each video stream consists of various types of scenes and a composition of the scenes are also different from each other, CPU usage statistics of each video stream also show different patterns. 

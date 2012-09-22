@@ -3,17 +3,17 @@
 
 \cite{Zhang:2009} is the first to indicate that security-sensitive information can be revealed by standard Unix \term{proc} file system. 
 The attack in this work takes advantage of the stack information of a target process contained in the proc file system. 
-The authors focus on the correlation between the system call of a target process and its ESP (stack pointer) values. 
+The authors focus on the correlation between the system call of the target process and its ESP (stack pointer) values. 
 They show that from a keystroke event can be identified the ESP content if they trigger system calls.
-Then they perform timing attack to infer the characters the victim input. 
-Our work also exploits similar side-channel. 
+Then, they perform the timing attack to infer the characters the victim input. 
+Our work also exploits the similar side-channel. 
 In our work, we use the standard Unix commands, \term{ps} or \term{top}, in order to measure the dynamics of CPU usage of a victim's process. 
-An adversary is able to use those command to get information of other processes, such as process ID, CPU usage or memory usage, without any permission 
+An adversary is able to use those command to get information of other processes, such as process ID, CPU usage, and memory usage, without any permission. 
 
 \cite{jana:memento} is also motivated by the fact that the proc file system can reveal security-sensitive information of other process. 
-The authos exploit the dynamics of memory footprints, that is, sequences of snapshots of the target program's data resident size (DRS).
-By monitoring memory footprints of victim's web browser process, they can infer which site the victim has visited. 
-Further they extended the attack onto Android platform, where any Android app can use the standard Unix proc facility without any permission or phone owner's consent. 
+The authors exploit the dynamics of memory footprints, that is, sequences of snapshots of the target program's Data Resident Size (DRS).
+By monitoring memory footprints of victim's web browser process, the authors can infer which site the victim has visited. 
+Further the authors extended the attack onto Android platform, where any Android app can use the standard Unix proc facility without any permission or phone owner's consent. 
 
 \cite{Saponas07devicesthat} shows the study of \term{Slingbox}\cite{slingbox}, one of the next-generation wireless video multimedia systems for the home. 
 The authors predict the content that is being transferred on Slingbox network by monitoring the transfer rate at which multimedia data is being sent from one device to the other. 
