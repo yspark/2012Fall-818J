@@ -1,7 +1,0 @@
-- Intro
-- Related works (Background)
-- Data collecting?
-- Algorithms (2)
-- Experimental Result
-- Future work?
-- Reference
