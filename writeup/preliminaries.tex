@@ -1,7 +1,8 @@
 \section{Preliminaries}
 \label{sec:preliminaries}
+
 \subsection{MPEG decoding}
-We first give a brief overview of MPEG decoding and describe how each MPEG video stream shows different CPU usage statistics patterns. 
+We first give a brief overview of MPEG decoding and describe how each MPEG video stream shows different CPU usage statistics pattern. 
 
 An MPEG video stream consists of a sequence of still images, that is, frames. 
 Each frame is defined as one of three frame types: \term{I-frame} (intrapicture), \term{P-frame} (Predicted picture) or \term{B-frame} (bidirectional predicted picture).
@@ -20,6 +21,35 @@ On the contrary, in case of an action scene where most parts of the image are ch
 Therefore, P-frame and B-frame should contain relatively larger data and a more processing time is required to decode.
 Since each video stream consists of various types of scenes and a composition of the scenes are also different from each other, CPU usage statistics of each video stream also show different patterns. 
 
-
 \subsection{Preliminary Experiments}
-CPU usage graphs here.
+
+\begin{figure}[!ht]
+	\centering
+	\subfigure[Thor] {
+		\includegraphics[scale=0.5]{Figures/preliminary_thor}
+		\label{fig:preliminary_thor}
+	}
+	\subfigure[The True Story of Puss 'n Boots] {
+		\includegraphics[scale=0.5]{Figures/preliminary_puss}
+		\label{fig:preliminary_thor}
+	}
+	\caption{CPU Usage Measurements of two movies}
+	\label{fig:preliminaries}
+\end{figure}
+
+In order to make our study feasible, two fundamental conditions should be satisfied: 1) each MPEG video stream shows different and possibly unique CPU usage pattern and 2) repeated measurement on a MPEG video stream show identical CPU usage statistics. 
+We show CPU usage statistics collected from two popular movies serviced on Netflix in Figure \ref{fig:preliminaries} and confirm that our assumptions is proved to be correct.
+We used Samsung Galaxy S device which was running Android 2.3 Gingerbread and installed Netflix application on the device. 
+Measurement interval was set to 5 seconds and we collected CPU usage statistics of first 30 minutes of each movie. 
+Per each movie, we repeated the measurement 5 times. 
+
+As shown in Figure \ref{fig:preliminaries}, 5 measurement results on a movie are almost identical in both cases. 
+There exist a few exceptional glitches, usually at the initial period during the measurement. 
+Our guess is that CPU usage of Netflix application is not deterministic when it starts rendering a movie because of initial buffering.
+However, it is later shown by experiments that the existence of glitches would not largely affect our CPU pattern matching algorithm if we apply proper smoothing methods. 
+
+It is also clear from Figure \ref{fig:preliminaries} that two different movies shows clearly different CPU usage statistics. 
+If we compare two measurement results using only a few measure points then it may not be easy to differentiate one movie from another.
+However if we use enough number of measure points, it would be possible to differentiate each movie from another with reasonably high accuracy. 
+
+

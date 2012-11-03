@@ -7,9 +7,9 @@ Once training data set is built, then KNN method classifies a given test data ba
 
 In our work, training data set and test data set consists of sequences of CPU usage measurements. 
 However, we need to pre-process both training data set and test data because they usually contain different number of CPU measurement.
-Since KNN method assume that both training data and test test are of the same length, somehow we need to modify both training and test data so that they have the same length. 
+Since KNN method assumes that both training data and test data are of the same length, somehow we need to modify both training and test data so that they have the same length. 
 So first, we need to define a fixed length and then divided test data and training data into several sub chunks with the fixed length. 
-We need to handle cases where a user watches a movie only for a while or watches several moives in a row. 
+We need to handle cases where a user watches a movie only for a while or watches several movies in a row. 
 Therefore the length should be short enough since we cannot always expect that a user watches a movie for a long time using their mobile handset.  
 On the other hand, the length should be long enough so that each sub chunk of test data can be classified into exactly one class. 
 Experimental results according to the length of sub chunk of data is shown in \ref{sec:experiments}.
