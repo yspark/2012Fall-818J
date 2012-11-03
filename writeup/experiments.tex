@@ -1,6 +1,42 @@
-\section{Experimental Setup}
+\section{Experimental Results}
 \label{sec:experiments}
 
+\subsection{Experimantal Setup}
+In this milestone report, we show experimental results where we apply KNN method to sequences of CPU usage measurements data.
+First, we select 10 movies from \term{Popular on Netflix} section provided by Netflix website and the list of selected movices are shown in Table \ref{tab:movies}.
+Then we collect CPU usage statistics of each movie using Netflix application on Samsung Galaxy S device which is running Android 2.3 Gingerbread.
+For the first 30 minutes of each movie, we measure CPU usage of Netflix at interval of 5 seconds and repeate the measurement 5 times.
+Measurement results of two out of ten movies are previously shown in \ref{fig:preliminaries}.
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+ID & Movie Title \\
+\hline
+1 & Transformers: Dark of the Moon \\
+2 & Thor \\
+3 & Hachi: A Dog's Tale \\
+4 & The True Story of Puss 'n Boots \\
+5 & Wallace \& Gromit: Loaf and Death \\
+6 & Super 8 \\
+7 & Mean Girls 2 \\
+8 & Captain America \\
+9 & Snatch \\
+10 & No Strings Attached \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Selected Movies}
+\label{tab:movies}
+\end{table}
+
+For each movie, we select one of five CPU usage sequence as test data and take the rest four sequences as training data set. 
+We set length of subsequence varying from 60 seconds to 360 seconds and then divide each test data and training data based on the selected length. 
+When dividing sequence data, we adopt a concept of sliding window of size 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{comment}
 \subsection{Overview}
 In this section, we describe 1) how CPU statistics for movies are collected, 2) how the collected raw data are processed to be useful in building up datasets and 3) how the processed data are stored in the datasets.
 
@@ -32,3 +68,5 @@ To convert the pre-processed sequences into data trails in the spatial domain, D
 
 \subsection{Storing processed sequence into a data structure} 
 For an efficient search operation, we decided to use R* tree\cite{Beckmann:1990}, which is a variant of R-tree. For first-approximation of spatial query, R* tree stores Minimum Bounding Rectangles (MBRs) that consist of multiple adjacent points in multi-dimensional space. In our project, the pre-processed video sequence can be depicted as a trail, which is a series of two-dimensional spatial points corresponding to the Fourier coefficients of each subsequence within the video sequence. On packing MBRs, the packing strategy used in \cite{Faloutsos:1994}\cite{Kamel:1993} is adopted to minimize the disk access cost in accessing a specific node in R* tree.
+
+\end{comment}
