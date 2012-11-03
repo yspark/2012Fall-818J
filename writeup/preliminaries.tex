@@ -37,15 +37,16 @@ Since each video stream consists of various types of scenes and a composition of
 	\label{fig:preliminaries}
 \end{figure}
 
-In order to make our study feasible, two fundamental conditions should be satisfied: 1) each MPEG video stream shows different and possibly unique CPU usage pattern and 2) repeated measurement on a MPEG video stream show identical CPU usage statistics. 
-We show CPU usage statistics collected from two popular movies serviced on Netflix in Figure \ref{fig:preliminaries} and confirm that our assumptions is proved to be correct.
-We used Samsung Galaxy S device which was running Android 2.3 Gingerbread and installed Netflix application on the device. 
+In order to make our study feasible, two fundamental conditions should be satisfied: 1) each MPEG video stream should show different and possibly unique CPU usage pattern and 2) repeated measurement on a MPEG video stream shoud show identical CPU usage statistics. 
+We collected CPU usage statistics of two popular movies serviced on Netflix and confirmed that our assumptions is proved to be correct.
+We used Samsung Galaxy S device with Android 2.3 and Netflix application running on the device. 
 Measurement interval was set to 5 seconds and we collected CPU usage statistics of first 30 minutes of each movie. 
 Per each movie, we repeated the measurement 5 times. 
+The measurement result is shown in Figure \ref{fig:preliminaries}
 
 As shown in Figure \ref{fig:preliminaries}, 5 measurement results on a movie are almost identical in both cases. 
 There exist a few exceptional glitches, usually at the initial period during the measurement. 
-Our guess is that CPU usage of Netflix application is not deterministic when it starts rendering a movie because of initial buffering.
+Our analysis is that CPU usage of Netflix application is not deterministic when it starts rendering a movie because of initial buffering.
 However, it is later shown by experiments that the existence of glitches would not largely affect our CPU pattern matching algorithm if we apply proper smoothing methods. 
 
 It is also clear from Figure \ref{fig:preliminaries} that two different movies shows clearly different CPU usage statistics. 
