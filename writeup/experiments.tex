@@ -2,6 +2,9 @@
 \label{sec:experiments}
 
 \subsection{Experimantal Setup}
+
+For the project milestone, we collected CPU statistics for 10 movies. Each statistic is captured by recording CPU statistics using the native UNIX command, Top, while playing 30-minute long video sequence. Video sequences and a query sequence are measured in 1 second interval which is the most fine-grained time interval in the Top command.
+
 In this milestone report, we show experimental results where we apply KNN method to sequences of CPU usage measurements data.
 First, we select 10 movies from \term{Popular on Netflix} section provided by Netflix website and the list of selected movices are shown in Table \ref{tab:movies}.
 Then we collect CPU usage statistics of each movie using Netflix application on Samsung Galaxy S device which is running Android 2.3 Gingerbread.
@@ -10,20 +13,15 @@ Measurement results of two out of ten movies are previously shown in \ref{fig:pr
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|c|l|}
+\begin{tabular}{|c|l|c|l|}
 \hline
-ID & Movie Title \\
+ID & Movie Title & ID & Movie Title \\ 
 \hline
-1 & Transformers: Dark of the Moon \\
-2 & Thor \\
-3 & Hachi: A Dog's Tale \\
-4 & The True Story of Puss 'n Boots \\
-5 & Wallace \& Gromit: Loaf and Death \\
-6 & Super 8 \\
-7 & Mean Girls 2 \\
-8 & Captain America \\
-9 & Snatch \\
-10 & No Strings Attached \\
+1 & Transformers: Dark of the Moon 		& 2 & Thor \\
+3 & Hachi: A Dog's Tale 			& 4 & The True Story of Puss 'n Boots \\
+5 & Wallace \& Gromit: Loaf and Death 	& 6 & Super 8 \\
+7 & Mean Girls 2 				& 8 & Captain America \\
+9 & Snatch 					& 10 & No Strings Attached \\
 \hline
 \end{tabular}
 \end{center}
