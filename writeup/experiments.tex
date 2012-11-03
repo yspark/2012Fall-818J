@@ -1,14 +1,14 @@
 \section{Experimental Results}
 \label{sec:experiments}
 
-\subsection{Experimantal Setup}
+\subsection{Experimental Setup}
 
-For the project milestone, we collected CPU statistics for 10 movies. Each statistic is captured by recording CPU statistics using the native UNIX command, Top, while playing 30-minute long video sequence. Video sequences and a query sequence are measured in 1 second interval which is the most fine-grained time interval in the Top command.
 
-In this milestone report, we show experimental results where we apply KNN method to sequences of CPU usage measurements data.
-First, we select 10 movies from \term{Popular on Netflix} section provided by Netflix website and the list of selected movices are shown in Table \ref{tab:movies}.
-Then we collect CPU usage statistics of each movie using Netflix application on Samsung Galaxy S device which is running Android 2.3 Gingerbread.
-For the first 30 minutes of each movie, we measure CPU usage of Netflix at interval of 5 seconds and repeate the measurement 5 times.
+In this milestone report, we show experimental results when we apply KNN method to sequences of CPU usage measurements data.
+We used Samsung Galaxy S device on which Android 2.3 Gingerbread is runnning, and Netflix application was used for collecting CPU usage statistics.
+10 movies are selected from \term{Popular on Netflix} section provided by Netflix website and the list of selected movices are shown in Table \ref{tab:movies}.
+CPU statistics of selected movies were captured by recording CPU statistics in 5-second interval using the native UNIX command, \term{top}, while playing the first 30 minutes of each movie. 
+The measurement were repeated 5 times for each movie.
 Measurement results of two out of ten movies are previously shown in \ref{fig:preliminaries}.
 
 \begin{table}[h!]
@@ -29,11 +29,37 @@ ID & Movie Title & ID & Movie Title \\
 \label{tab:movies}
 \end{table}
 
-For each movie, we select one of five CPU usage sequence as test data and take the rest four sequences as training data set. 
-We set length of subsequence varying from 60 seconds to 360 seconds and then divide each test data and training data based on the selected length. 
-When dividing sequence data, we adopt a concept of sliding window of size 
+
+\subsection{KNN Experiment Results}
+
+For each movie, one of five CPU usage sequence is selected as test data and the rest four sequences are considered as training data set. 
+The length of subsequence varying from 60 seconds to 360 seconds is set and each test data and training data is divided based on the subsequence length.
+When dividing sequence data, we adopt a concept of sliding window which moves by 1 step size.
+Each data sequence consists of $360$ measurement points, and therefore $(360 - subsequence\_length + 1)$ subsequences are generated from the data sequence. 
+
+After building up test data set and training data set, we apply KNN method in order to classify each test data based on training data set. 
+$k$ value is set to 3 and $\epsilon$ is set to the length of subsequence in order to reduce the execution time. 
+The accuracy of classification according to the length of subsequence is shown in Figure \ref{fig:experiment_knn}.
+The accuracy is relatively low as 44% when subsequence length is set to 60-second.
+However, the accuracy increases up to 88% when subsequence length is increased to 180-second.
+The experimental result shows that given 10 movies, our side channel attack correctly predicts which movie a user is watching with CPU usage statistics of 150-second.
+
+\begin{figure}[!ht]
+\centering
+\includegraphics[scale=0.50]{Figures/experiment_knn}
+\caption{KNN Classification Accuracy}
+\label{fig:experiment_knn}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{comment}
+For the project milestone, we collected CPU statistics for 10 movies. 
+Each statistic is captured by recording CPU statistics using the native UNIX command, Top, while playing 30-minute long video sequence. 
+Video sequences and a query sequence are measured in 1 second interval which is the most fine-grained time interval in the Top command.
+\end{comment}
+
+
 \begin{comment}
 \subsection{Overview}
 In this section, we describe 1) how CPU statistics for movies are collected, 2) how the collected raw data are processed to be useful in building up datasets and 3) how the processed data are stored in the datasets.
