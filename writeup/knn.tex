@@ -1,3 +1,33 @@
-\subsection{knn}
+\subsection{K-Nearest Neighbor Algorithm}
  
-KNN here.
+In order for CPU usage pattern matching, we adopted \term{k-nearest neighbor (KNN)} method, one of machine learning techniques widely used for pattern recognition.
+KNN is a supervised machine learning and therefore it requires \term{training data set} which is pre-collected CPU usage statistics of target movies, and \term{test data set} on which KNN method should make a prediction based on the training data set.
+If we give a unique class to each target movie, then our CPU usage pattern matching problem turns into classification problem. 
+Once training data set is built, then KNN method classifies a given test data based on the training data set. 
+
+In our work, training data set and test data set consists of sequences of CPU usage measurements. 
+However, we need to pre-process both training data set and test data because they usually contain different number of CPU measurement.
+Since KNN method assume that both training data and test test are of the same length, somehow we need to modify both training and test data so that they have the same length. 
+So first, we need to define a fixed length and then divided test data and training data into several sub chunks with the fixed length. 
+We need to handle cases where a user watches a movie only for a while or watches several moives in a row. 
+Therefore the length should be short enough since we cannot always expect that a user watches a movie for a long time using their mobile handset.  
+On the other hand, the length should be long enough so that each sub chunk of test data can be classified into exactly one class. 
+Experimental results according to the length of sub chunk of data is shown in \ref{sec:experiments}.
+
+A sequence of CPU usage values is considered as a vector and each CPU usage value measured at specific time interval is considered as a vector element. 
+Then each data can be considered as a vector in a high dimensional space and then we can calculate the \term{Euclidean distance} between a given test data and pre-built training data sets using the below equation: 
+
+\[
+d( \vec{tr}, \vec{te} ) = [ \sum_{i=1}^{N} (\vec{tr}_i - \vec{te}_i)^2  ]^{(1/2)}
+\]
+where $\vec{tr}$ is a vector of training data and $\vec{te}$ is a vector of test data. 
+Then we can identify $K$ nearest neighbors of the test data and then make a prediction based on the majority class of the identified neighbors. 
+
+
+\begin{comment}
+There exist a few other machine learning methods such as \term{Support Vector Machine} or \term{Perceptron}, they have couple of drawbacks when applied to our pattern matching problem: 
+
+(1) Features are not fixed 
+
+Consider a sequence of CPU usage values as a vector and then KNN tries to find out k nearest vectors 
+\end{comment}
