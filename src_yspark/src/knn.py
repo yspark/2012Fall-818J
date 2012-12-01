@@ -8,7 +8,15 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 	wrong = zeros(11)
 	precision = zeros(11, float)
 
-	for testIndex in range(len(Xtest)):
+	if Xtest.ndim == 1:
+		testInteration = 1
+		RUN_MODE = 0
+	else:
+		testInteration = len(Xtest)
+		RUN_MODE = 1
+	#endif
+		
+	for testIndex in range(testInteration):
 		#print testIndex, len(Xtest)
 
 		nearestNeighbors = zeros((k,2), dtype=float)
@@ -63,7 +71,7 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 				prediction = [nearestNeighbors[i,0], len(tempArr), mean(tempArr[:,1]), min(tempArr[:,1])]
 			#end if
 		#end for
-
+	
 		if Ytest[testIndex] == prediction[0]:
 			correct[Ytest[testIndex]] += 1
 		else:
@@ -71,37 +79,16 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 
 		precision = correct / (correct + wrong)
 
+		if RUN_MODE == 0:
+			print ('%d-Nearest Neighbors' % k)
+			print nearestNeighbors
+
 		#print prediction[0]
 
 		#print nearestNeighbors
 		#print prediction[0]
 		#print precision
 		
-
-	
-		'''
-		print counts
-		print countsArgsort
-		'''
-	
-		'''
-		if nearestNeighbors[countsArgsort[len(counts)-1]] > math.ceil(float(k)/2):
-			prediction = nearestNeighbors[counts[len(counts)-1],0]
-			print prediction
-
-		temp = array(nearestNeighbors[:,0], dtype=int)
-		if Ytest[testIndex] == argmax(bincount(temp)):
-			correct[Ytest[testIndex]] += 1
-		else:
-			wrong[Ytest[testIndex]] += 1
-
-		print nearestNeighbors,argmax(bincount(temp)),  Ytest[testIndex]
-
-		print("Prediction %d\n" % argmax(bincount(temp)))
-		print correct
-		print wrong
-		'''
-
 	#end for testIndex
 
 	print precision
