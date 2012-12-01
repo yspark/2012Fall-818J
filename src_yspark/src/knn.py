@@ -8,14 +8,7 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 	wrong = zeros(11)
 	precision = zeros(11, float)
 
-	if Xtest.ndim == 1:
-		testInteration = 1
-		RUN_MODE = 0
-	else:
-		testInteration = len(Xtest)
-		RUN_MODE = 1
-	#endif
-		
+
 	for testIndex in range(testInteration):
 		#print testIndex, len(Xtest)
 
@@ -78,10 +71,6 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 			wrong[Ytest[testIndex]] += 1
 
 		precision = correct / (correct + wrong)
-
-		if RUN_MODE == 0:
-			print ('%d-Nearest Neighbors' % k)
-			print nearestNeighbors
 
 		#print prediction[0]
 

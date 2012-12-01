@@ -32,7 +32,7 @@ if len(sys.argv) >= 6:
 		candidateList[i-5] = int(sys.argv[i])
 elif len(sys.argv) != 1:
 	print('Usage: python Main_knn <No arguments>')
-	print('Usage: python Main_knn <Movie Label> <Test Index (1-5)> <Start Offset> <Length> <Candidate #1> <Candidate #2> ... ')
+	print('Usage: python Main_knn <Movie Label> <Test Index (0~4)> <Start Offset> <Length> <Candidate #1> <Candidate #2> ... ')
 	sys.exit()
 #end if len(sys.argv) >= 6:
 
