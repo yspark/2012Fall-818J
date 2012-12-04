@@ -10,8 +10,6 @@ def knnOneSequence(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 
 	nearestNeighbors = zeros((k,2), dtype=float)
 
-
-
 	for trainIndex in range(len(Xtrain)):
 		# normalize
 		#test[testIndex] -= (mean(Xtest[0]) - mean(Xtrain[trainIndex]))
