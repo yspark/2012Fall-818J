@@ -7,7 +7,7 @@
 In this milestone report, we show experimental results when we apply KNN method to sequences of CPU usage measurements data.
 We used Samsung Galaxy S device on which Android 2.3 Gingerbread is running, and Netflix application was used for collecting CPU usage statistics.
 10 movies are selected from \term{Popular on Netflix} section of Netflix website and selected movies are shown in Table \ref{tab:movies}.
-CPU statistics of selected movies were captured by recording CPU statistics in 5-second interval using the native UNIX command, \term{top}, while playing the first 30 minutes of each movie. 
+CPU statistics of selected movies were captured by recording CPU statistics in 1-second and 5-second intervals using the native UNIX command, \term{top}, while playing the first 30 minutes of each movie. 
 The measurement was repeated 5 times for each movie.
 Measurement results of two selected movies are previously shown in Figure \ref{fig:preliminaries}.
 
@@ -28,6 +28,9 @@ ID & Movie Title & ID & Movie Title \\
 \caption{Selected Movies}
 \label{tab:movies}
 \end{table}
+
+\subsection{Fast Subsequence Matching Algorithm Results}
+Query subsequences are chosen from a 30-min length sequence with varying starting index and length. At every 60 sec, the subsequence was extracted with length, $l = (180, 240, 300, 600, 900, 1200)$. 
 
 \subsection{KNN Experiment Results}
 
