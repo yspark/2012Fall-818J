@@ -30,7 +30,31 @@ ID & Movie Title & ID & Movie Title \\
 \end{table}
 
 \subsection{Fast Subsequence Matching Algorithm Results}
-Query subsequences are chosen from a 30-min length sequence with varying starting index and length. At every 60 sec, the subsequence was extracted with length, $l = (180, 240, 300, 600, 900, 1200)$. 
+Query subsequences are chosen from a 30-min length sequence with varying starting index and length. At every 60 second interval, the subsequencee are selectd with length, $l =$ [180, 240, 300, 600, 900, and 1200] (3, 4, 5, 10, 15, 20 minutes). For each selected subsequence, various lengths of Discrete Fourier Transform window are applied to find better performance. The DFT window with length, $w=$ [50, 100, 150, 200, 300], are applied to extract the two lowest Fourier coefficient ($f=2$). The DFT window length affects the performance of the matching algorithm. If the length of the DFT window is too short, then DFT procedure will result in high noise sensitivity. Otherwise, the DFT procedure results in over-smoothing of the data.
+
+The performance of the matching algorithm is measured by the rate of the number of correct predictions to the number of total queries.
+\begin{equation}
+R_{succ} = \frac{\#\: of \:correct\: predictions}{\# \:of\: total \:queries}
+\end{equation}
+
+The Table \ref{tab:succ_table} shows the success rate of the matching algorithm with varying sequence length and varying DFT window size. 
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|c|| >{\centering} p{1cm}| >{\centering} p{1cm}| >{\centering}p{1cm}| >{\centering}p{1cm}| >{\centering}p{1cm} |}
+\hline
+Seq Len ($l$) \textbackslash FFT Len ($w$)& 50 & 100 & 150 & 200 & 300
+\tabularnewline
+\hline\hline
+180 & 0.46 & 0.54 & 0.62 & N/A & N/A
+\tabularnewline
+\hline
+\end{tabular}
+\end{center}
+\caption{Selected Movies}
+\label{tab:succ_table}
+\end{table}
+
 
 \subsection{KNN Experiment Results}
 
