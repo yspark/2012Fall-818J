@@ -5,17 +5,25 @@ import knnOneSequence
 
 from numpy import *
 
-
+###########################################
+#	Defines
+###########################################
 MEASURE_TIME_SEC = 1800
 ITERATION = 5
-CPU_INTERVAL = 5
+CPU_INTERVAL = 1
 NUM_FEATURE = int(MEASURE_TIME_SEC / CPU_INTERVAL)
 
-MIN_TEST_FEATURE_SIZE = 12
-MAX_TEST_FEATURE_SIZE = 36
-TEST_FEATURE_SIZE_STEP = 6
+if CPU_INTERVAL == 5:
+	MIN_TEST_FEATURE_SIZE = 12
+	MAX_TEST_FEATURE_SIZE = 36
+	TEST_FEATURE_SIZE_STEP = 6
+else:
+	MIN_TEST_FEATURE_SIZE = 60
+	MAX_TEST_FEATURE_SIZE = 600
+	TEST_FEATURE_SIZE_STEP = 60
+#endif
+	
 
-TESTSET_INDEX = 5
 
 ###########################################
 # Input arguments process
@@ -44,7 +52,7 @@ elif len(sys.argv) != 1:
 # Y: each row has an index of movie sequence corresponding to the same row of X
 ###########################################
 X, Y = buildDataset.buildDataset(CPU_INTERVAL)
-
+print('buildDataset done');
 		
 ###########################################
 # No input arguments
@@ -53,39 +61,33 @@ if len(sys.argv) == 1:
 	for testFeatureSize in range(MIN_TEST_FEATURE_SIZE, MAX_TEST_FEATURE_SIZE+1, TEST_FEATURE_SIZE_STEP):
 
 		for testSetIndex in range(1, ITERATION+1):
-			Xtrain = zeros(testFeatureSize, dtype=float)
-			Ytrain = zeros(1, dtype=float)
+			Xtrain = zeros((len(X)*(NUM_FEATURE - testFeatureSize), testFeatureSize), dtype=float)
+			Ytrain = zeros((len(X)*(NUM_FEATURE - testFeatureSize)), dtype=float)
 
-			Xtest = zeros(testFeatureSize, dtype=float)
-			Ytest = zeros(1, dtype=float)
+			Xtest = zeros((len(X)*(NUM_FEATURE - testFeatureSize), testFeatureSize), dtype=float)
+			Ytest = zeros((len(X)*(NUM_FEATURE - testFeatureSize)), dtype=float)
 
+			trainCount = 0
+			testCount = 0
 			for i in range(len(X)):
-				#for j in range(NUM_FEATURE):
 				for j in range(len(X[i]) - testFeatureSize):
 					if ((i+1) % ITERATION) == (testSetIndex % ITERATION):
-						Xtest = vstack((Xtest, X[i][j:j+testFeatureSize]))
-						Ytest = concatenate((Ytest, [Y[i]]), axis=1)
+						Xtest[testCount] = X[i][j:j+testFeatureSize]
+						Ytest[testCount] = Y[i]
+						testCount += 1
 					else:
-						Xtrain = vstack((Xtrain, X[i][j:j+testFeatureSize]))	
-						Ytrain = concatenate((Ytrain, [Y[i]]), axis=1)
+						Xtrain[trainCount] = X[i][j:j+testFeatureSize]
+						Ytrain[trainCount] = Y[i]
+						trainCount += 1
 					#end if
 				#end for j		
 			#end for i
 
 			
-			Xtrain = Xtrain[1:len(Xtrain)]
-			Ytrain = Ytrain[1:len(Ytrain)]
-			Xtest = Xtest[1:len(Xtest)]
-			Ytest = Ytest[1:len(Ytest)]
-
-			'''
-			dataset.X = Xtrain
-			dataset.Y = Ytrain
-			dataset.Xte = Xtest
-			dataset.Yte = Ytest
-			'''
-
-			#print len(Xtrain), len(Ytrain), len(Xtest), len(Ytest)
+			Xtrain = Xtrain[0:trainCount]
+			Ytrain = Ytrain[0:trainCount]
+			Xtest = Xtest[0:testCount]
+			Ytest = Ytest[0:testCount]
 
 			print('================================================================')
 			print('KNN (Feature %d, TestSet %d)' % (testFeatureSize, testSetIndex))
@@ -101,26 +103,32 @@ if len(sys.argv) == 1:
 # Full input arguments
 ###########################################
 if len(sys.argv) >= 6:
-		Xtrain = zeros(length, dtype=float)
-		Ytrain = zeros(1, dtype=float)
+	Xtrain = zeros((len(X)*(NUM_FEATURE - length), length), dtype=float)
+	Ytrain = zeros((len(X)*(NUM_FEATURE - length), 1), dtype=float)
 
-		Xtest = X[(movieLabel-1)*5 + testIndex][startOffset:startOffset + length]
-		Ytest = zeros(1, dtype=float) 	
-		Ytest[0] = movieLabel
+	Xtest = X[(movieLabel-1)*5 + testIndex][startOffset:startOffset + length]
+	Ytest = zeros(1, dtype=float) 	
+	Ytest[0] = movieLabel
 
-		for i in range(len(X)):
+	trainCount = 0	
+	for i in range(len(X)):
 			if i == (movieLabel-1)*5 + testIndex:
 				continue
 			
 			for j in range(len(X[i]) - length):
-				Xtrain = vstack((Xtrain, X[i][j:j+length]))	
-				Ytrain = concatenate((Ytrain, [Y[i]]), axis=1)
+				Xtrain[trainCount] = X[i][j:j+length]			
+				Ytrain[trainCount] = Y[i]
+				trainCount+=1
 			#end for j		
-		#end for i
+	#end for i
 
-		print('================================================================')
-		print('MovieLabel:%d Index:%d StartOffset:%d Length:%d\nCandidates:' % (movieLabel, testIndex, startOffset, length))
-		print(candidateList)
-		print('================================================================')
-		knnOneSequence.knnOneSequence(3, length, Xtrain, Ytrain, Xtest, Ytest)
+	Xtrain = Xtrain[0:trainCount]
+	Ytrain = Ytrain[0:trainCount]
+
+			
+	print('================================================================')
+	print('MovieLabel:%d Index:%d StartOffset:%d Length:%d\nCandidates:' % (movieLabel, testIndex, startOffset, length))
+	print(candidateList)
+	print('================================================================')
+	knnOneSequence.knnOneSequence(3, length, Xtrain, Ytrain, Xtest, Ytest)
 #end if len(sys.argv) >= 6:
