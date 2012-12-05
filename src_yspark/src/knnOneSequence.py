@@ -10,28 +10,35 @@ def knnOneSequence(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 
 	nearestNeighbors = zeros((k,2), dtype=float)
 
+	maxDist = -1;
+	maxIndex = -1;
+	numNeighbor = 0;
+	
 	for trainIndex in range(len(Xtrain)):
 		# normalize
 		#test[testIndex] -= (mean(Xtest[0]) - mean(Xtrain[trainIndex]))
-		dist = linalg.norm(Xtest[0]-Xtrain[trainIndex])
+		dist = linalg.norm(Xtest-Xtrain[trainIndex])
 	
 		# Apply epsilon-ball
 		#if dist > epsilon:
 		#	continue				
 
-		minDist = nearestNeighbors[:,1].min()
-		minIndex = argmin(nearestNeighbors[:,1]) 
-		
-		maxDist = nearestNeighbors[:,1].max()
-		maxIndex = argmax(nearestNeighbors[:,1]) 
-		
-		if minDist == 0 and nearestNeighbors[minIndex,0] == 0:
-			nearestNeighbors[minIndex,0] = Ytrain[trainIndex]
-			nearestNeighbors[minIndex,1] = dist
+		if numNeighbor < 3:
+			nearestNeighbors[numNeighbor,0] = Ytrain[trainIndex]
+			nearestNeighbors[numNeighbor,1] = dist
+			numNeighbor+=1
+
+			if numNeighbor == 3:							
+				maxDist = nearestNeighbors[:,1].max()
+				maxIndex = argmax(nearestNeighbors[:,1]) 
+			#end if numNeighbor == 3:						
 		elif maxDist > dist:
-			nearestNeighbors[maxIndex,0] = Ytrain[trainIndex]
-			nearestNeighbors[maxIndex,1] = dist
-		#end if			
+				nearestNeighbors[maxIndex,0] = Ytrain[trainIndex]
+				nearestNeighbors[maxIndex,1] = dist
+
+				maxDist = nearestNeighbors[:,1].max()
+				maxIndex = argmax(nearestNeighbors[:,1]) 								
+		#end if numNeighbor < 3:
 	#end for trainIndex
 
 

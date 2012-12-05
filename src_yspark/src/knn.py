@@ -8,34 +8,40 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 	wrong = zeros(11)
 	precision = zeros(11, float)
 
-
-	for testIndex in range(testInteration):
+	for testIndex in range(len(Xtest)):
 		#print testIndex, len(Xtest)
 
 		nearestNeighbors = zeros((k,2), dtype=float)
+
+		maxDist = -1;
+		maxIndex = -1;
+		numNeighbor = 0;
 
 		for trainIndex in range(len(Xtrain)):
 			# normalize
 			#test[testIndex] -= (mean(Xtest[testIndex]) - mean(Xtrain[trainIndex]))
 			dist = linalg.norm(Xtest[testIndex]-Xtrain[trainIndex])
-		
+
 			# Apply epsilon-ball
 			if dist > epsilon:
 				continue				
 
-			minDist = nearestNeighbors[:,1].min()
-			minIndex = argmin(nearestNeighbors[:,1]) 
-			
-			maxDist = nearestNeighbors[:,1].max()
-			maxIndex = argmax(nearestNeighbors[:,1]) 
-			
-			if minDist == 0 and nearestNeighbors[minIndex,0] == 0:
-				nearestNeighbors[minIndex,0] = Ytrain[trainIndex]
-				nearestNeighbors[minIndex,1] = dist
+			if numNeighbor < 3:
+				nearestNeighbors[numNeighbor,0] = Ytrain[trainIndex]
+				nearestNeighbors[numNeighbor,1] = dist
+				numNeighbor+=1
+
+				if numNeighbor == 3:							
+					maxDist = nearestNeighbors[:,1].max()
+					maxIndex = argmax(nearestNeighbors[:,1]) 
+				#end if numNeighbor == 3:						
 			elif maxDist > dist:
-				nearestNeighbors[maxIndex,0] = Ytrain[trainIndex]
-				nearestNeighbors[maxIndex,1] = dist
-			#end if			
+					nearestNeighbors[maxIndex,0] = Ytrain[trainIndex]
+					nearestNeighbors[maxIndex,1] = dist
+
+					maxDist = nearestNeighbors[:,1].max()
+					maxIndex = argmax(nearestNeighbors[:,1]) 								
+			#end if numNeighbor < 3:		
 		#end for trainIndex
 
 		'''
@@ -64,25 +70,14 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 				prediction = [nearestNeighbors[i,0], len(tempArr), mean(tempArr[:,1]), min(tempArr[:,1])]
 			#end if
 		#end for
-	
+
 		if Ytest[testIndex] == prediction[0]:
 			correct[Ytest[testIndex]] += 1
 		else:
 			wrong[Ytest[testIndex]] += 1
 
 		precision = correct / (correct + wrong)
-
-		#print prediction[0]
-
-		#print nearestNeighbors
-		#print prediction[0]
-		#print precision
-		
 	#end for testIndex
 
 	print precision
-
-#endn def knn()
-	
-
-
+#endn def knn()	
