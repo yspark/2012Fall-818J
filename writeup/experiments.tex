@@ -37,7 +37,7 @@ The performance of the matching algorithm is measured by the rate of the number 
 R_{succ} = \frac{\#\: of \:correct\: predictions}{\# \:of\: total \:queries}
 \end{equation}
 
-The Table \ref{tab:succ_table} shows the success rate of the matching algorithm with varying sequence length and varying DFT window size. 
+The Table \ref{tab:succ_table} shows the success rate of the matching algorithm with varying sequence length and varying DFT window size. It's obvious that the success rate increases as the length of query sequences goes large. As shown in the Table \ref{tab:succ_table}, the success rate increases as the sequence length increases when the size of DFT window is fixed. With the collected movie sequences, our matching scheme gives the best prediction performance when the DFT window length is 200. However, it is impossible to apply DFT procedure with the window lenght 200 to query sequences that are shorter than DFT window length. Those entries in the Table are marked as non-applicable. 
 
 \begin{table}[h!]
 \begin{center}
@@ -45,8 +45,18 @@ The Table \ref{tab:succ_table} shows the success rate of the matching algorithm 
 \hline
 Seq Len ($l$) \textbackslash FFT Len ($w$)& 50 & 100 & 150 & 200 & 300
 \tabularnewline
-\hline\hline
+\hline
 180 & 0.46 & 0.54 & 0.62 & N/A & N/A
+\tabularnewline
+240 & 0.475 & 0.585 & 0.64 & 0.655 & N/A
+\tabularnewline
+300 & 0.52 & 0.595 & 0.665 & 0.65 & 0.69
+\tabularnewline
+600 & 0.705 & 0.69 & 0.75 & 0.747 & 0.74
+\tabularnewline
+900 & 0.726 & 0.7428 & 0.8 & 0.791 & 0.72
+\tabularnewline
+1200 & 0.78 & 0.755 & 0.7875 & 0.814 & 0.74
 \tabularnewline
 \hline
 \end{tabular}
@@ -55,6 +65,7 @@ Seq Len ($l$) \textbackslash FFT Len ($w$)& 50 & 100 & 150 & 200 & 300
 \label{tab:succ_table}
 \end{table}
 
+The fast subsequence matching algorithm provides the result very fast in short execution time with considerable accuracy over 70\% when the DFT window length is 200. This efficiency comes from the fact that the algorithm exploits only lowest two frequencies ($f=2$) of (sub-)sequences extracted by DFT to predict the title of the movie. However, the efficiency in the execution time compromises the certainty of our prediction. 
 
 \subsection{KNN Experiment Results}
 
