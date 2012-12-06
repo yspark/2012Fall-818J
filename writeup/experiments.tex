@@ -61,11 +61,34 @@ Seq Len ($l$) \textbackslash FFT Len ($w$)& 50 & 100 & 150 & 200 & 300
 \hline
 \end{tabular}
 \end{center}
-\caption{Selected Movies}
+\caption{Success Rate of Prediction}
 \label{tab:succ_table}
 \end{table}
 
-The fast subsequence matching algorithm provides the result very fast in short execution time with considerable accuracy over 70\% when the DFT window length is 200. This efficiency comes from the fact that the algorithm exploits only lowest two frequencies ($f=2$) of (sub-)sequences extracted by DFT to predict the title of the movie. However, the efficiency in the execution time compromises the certainty of our prediction. 
+The fast subsequence matching algorithm provides the result very fast in short execution time with considerable accuracy over 70\% when the DFT window length is 200. This efficiency comes from the fact that the algorithm exploits only lowest two frequencies ($f=2$) of (sub-)sequences extracted by DFT to predict the title of the movie. However, the efficiency in the execution time compromises the certainty of our prediction. Thus, we define the certainty of the succerate as follows.
+\begin{equation}
+C = \frac{\#\: of \:correct\: query\: responses}{\# \:of\: total \:query\: responses}
+\end{equation}
+
+$C$ is defined as the rate of correct query responses to total query responses. At each query, the algorithm returns multiple number of responses that may be correct or wrong prediction because the data structure, R* Tree, searches each MBR within some threshold distance from the query and returns multiple nodes that correspond to response. Thus, $C$ can be regarded as true positive rate of query response. The Table \ref{tab:tp_table} shows $C$ with DFT window length, $w =$ [150, 200, 300].
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|c|| >{\centering} p{1cm}| >{\centering} p{1cm}| >{\centering}p{1cm}|}
+\hline
+FFT Len ($w$)& 150 & 200 & 300
+\tabularnewline
+\hline
+Average & 0.487 & 0.539 & 0.610 
+\tabularnewline
+\hline
+\end{tabular}
+\end{center}
+\caption{True Positive Rate}
+\label{tab:tp_table}
+\end{table}
+
+As shown in the Table \ref{tab:tp_table}, the $C$ is around 50 percent for the DFT length 150 and 200, and 61 percent on average for the DFT length 300. The results show that the correct prediction occupies more than 50 percent of total response while the other 9 movie sequences occupy rest of the total response. In most cases, the number of the correct prediction usually dominates the second best prediction of the algorithm. However, there're still cases where the correct prediction and the second best prediction are not differenciated by the number of query responses. For example, if the correct prediction takes 40\% of the total query responses and the second best prediction takes 30\% of the total query responses, then it may be hard to say that the first best prediction is correct. Thus, the prediction scheme needs to be enhanced to deal with the case when the difference of $C$ is small.
 
 \subsection{KNN Experiment Results}
 
