@@ -23,12 +23,12 @@ def knnOneSequence(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 		#if dist > epsilon:
 		#	continue				
 
-		if numNeighbor < 3:
+		if numNeighbor < k:
 			nearestNeighbors[numNeighbor,0] = Ytrain[trainIndex]
 			nearestNeighbors[numNeighbor,1] = dist
 			numNeighbor+=1
 
-			if numNeighbor == 3:							
+			if numNeighbor == k:
 				maxDist = nearestNeighbors[:,1].max()
 				maxIndex = argmax(nearestNeighbors[:,1]) 
 			#end if numNeighbor == 3:						

@@ -28,19 +28,20 @@ else:
 ###########################################
 # Input arguments process
 ###########################################
-if len(sys.argv) >= 6:
-	movieLabel = int(sys.argv[1])
-	testIndex = int(sys.argv[2])
-	startOffset = int(sys.argv[3])
-	length = int(sys.argv[4])
+if len(sys.argv) >= 7:
+	knnMode = int(sys.argv[1])
+	movieLabel = int(sys.argv[2])
+	testIndex = int(sys.argv[3])
+	startOffset = int(sys.argv[4])
+	length = int(sys.argv[5])
 
-	candidateList = zeros(len(sys.argv)-5)
+	candidateList = zeros(len(sys.argv)-6)
 
-	for i in range(5, len(sys.argv)):
-		candidateList[i-5] = int(sys.argv[i])
+	for i in range(6, len(sys.argv)):
+		candidateList[i-6] = int(sys.argv[i])
 elif len(sys.argv) != 1:
 	print('Usage: python Main_knn <No arguments>')
-	print('Usage: python Main_knn <Movie Label> <Test Index (0~4)> <Start Offset> <Length> <Candidate #1> <Candidate #2> ... ')
+	print('Usage: python Main_knn <KNN Mode> <Movie Label> <Test Index (0~4)> <Start Offset> <Length> <Candidate #1> <Candidate #2> ... ')
 	sys.exit()
 #end if len(sys.argv) >= 6:
 
@@ -69,8 +70,10 @@ if len(sys.argv) == 1:
 
 			trainCount = 0
 			testCount = 0
+
 			for i in range(len(X)):
-				for j in range(len(X[i]) - testFeatureSize):
+				#for j in range(len(X[i]) - testFeatureSize):
+				for j in range(0, len(X[i]) - testFeatureSize):
 					if ((i+1) % ITERATION) == (testSetIndex % ITERATION):
 						Xtest[testCount] = X[i][j:j+testFeatureSize]
 						Ytest[testCount] = Y[i]
@@ -112,6 +115,13 @@ if len(sys.argv) >= 6:
 
 	trainCount = 0	
 	for i in range(len(X)):
+			# Build training set using the given candidate list.
+			if knnMode == 1:
+				if Y[i] not in candidateList:
+					continue
+				#end if
+			#end if
+	
 			if i == (movieLabel-1)*5 + testIndex:
 				continue
 			
@@ -127,7 +137,7 @@ if len(sys.argv) >= 6:
 
 			
 	print('================================================================')
-	print('MovieLabel:%d Index:%d StartOffset:%d Length:%d\nCandidates:' % (movieLabel, testIndex, startOffset, length))
+	print('KnnMode:%d MovieLabel:%d Index:%d StartOffset:%d Length:%d\nCandidates:' % (knnMode, movieLabel, testIndex, startOffset, length))
 	print(candidateList)
 	print('================================================================')
 	knnOneSequence.knnOneSequence(3, length, Xtrain, Ytrain, Xtest, Ytest)

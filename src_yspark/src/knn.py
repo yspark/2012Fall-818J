@@ -1,6 +1,6 @@
 from numpy import *
 import math
-
+import sys
 
 def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 
@@ -8,8 +8,8 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 	wrong = zeros(11)
 	precision = zeros(11, float)
 
-	for testIndex in range(len(Xtest)):
-		#print testIndex, len(Xtest)
+	for testIndex in range(0, len(Xtest), len(Xtest)/300):
+		print('Processing %d/%d' % (testIndex, len(Xtest)))
 
 		nearestNeighbors = zeros((k,2), dtype=float)
 
@@ -19,19 +19,19 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 
 		for trainIndex in range(len(Xtrain)):
 			# normalize
-			#test[testIndex] -= (mean(Xtest[testIndex]) - mean(Xtrain[trainIndex]))
+			Xtest[testIndex] -= (mean(Xtest[testIndex]) - mean(Xtrain[trainIndex]))
 			dist = linalg.norm(Xtest[testIndex]-Xtrain[trainIndex])
 
 			# Apply epsilon-ball
-			if dist > epsilon:
-				continue				
+			#if dist > epsilon:
+			#	continue				
 
-			if numNeighbor < 3:
+			if numNeighbor < k:
 				nearestNeighbors[numNeighbor,0] = Ytrain[trainIndex]
 				nearestNeighbors[numNeighbor,1] = dist
 				numNeighbor+=1
 
-				if numNeighbor == 3:							
+				if numNeighbor == k:							
 					maxDist = nearestNeighbors[:,1].max()
 					maxIndex = argmax(nearestNeighbors[:,1]) 
 				#end if numNeighbor == 3:						
@@ -79,5 +79,9 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 		precision = correct / (correct + wrong)
 	#end for testIndex
 
-	print precision
+	for i in range(1,11):
+		sys.stdout.write('%f\t' % precision[i])
+	#end for
+	sys.stdout.write('\n')
+		
 #endn def knn()	
