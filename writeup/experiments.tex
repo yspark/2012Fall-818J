@@ -2,7 +2,7 @@
 \label{sec:experiments}
 
 We evaluate the performance of \term{fast subsequence matching} algorithm and \term{KNN} algorithm separately.
-Then we evalute the performance of the unified algorithm where the two algorithms are harmonized together. 
+Then we evaluate the performance of the unified algorithm where the two algorithms are harmonized together. 
 
 \subsection{Experimental Setup}
 \term{Samsung Galaxy S} device running \term{Android 2.3 Gingerbread} and \term{Netflix} application are used for our experiments. 
@@ -30,6 +30,7 @@ ID & Movie Title & ID & Movie Title \\
 \end{table}
 
 For each movie, one out of five raw sequences is selected as \term{query sequence} and the rest are considered \term{training sequences}.
+Then query sequence and training sequences are preprocessed both in fast subsequence matching algorithm and KNN algorithm. 
 In Fast subsequence matching algorithm, query sequence and training sequences are preprocessed and converted into space-series sequences separately through DFFT.
 Then query sequence is divided into several query subsequences and fast subsequence matching algorithm predicts the movie title of each query subsequence. 
 In KNN algorithm, query sequence is divided into several query subsequences and then training sequences are also divided into subsequences of the same length as query subsequences. 
@@ -39,7 +40,7 @@ These procedures are depicted in Figure \ref{fig:train_test_set}.
 \begin{figure}[!h]
 \centering
 \includegraphics[scale=0.60]{Figures/TrainTestSet}
-\caption{Building up training and test subsequences from CPU usage sequences}
+\caption{Preprocessing of raw sequences in Fast Subsequence Matching algorithm and KNN algorithm}
 \label{fig:train_test_set}
 \end{figure}
 
