@@ -1,6 +1,6 @@
 \subsection{KNN Results}
 
-For each movie, one of five CPU usage sequence is selected as test data and the rest four sequences are considered as training data set. 
+For each movie, one of five CPU usage sequences is selected as query sequence and the rest four sequences are considered training data set, as described in \ref{sec:experimental_setup}, 
 The length of subsequence varying from 60 seconds to 360 seconds is set and each test and training data is divided based on the subsequence length as described in \ref{sec:knn}.
 When dividing sequence data, we adopt a concept of sliding window which moves by 1 step size.
 Each data sequence consists of $360$ measurement points, and therefore $(360 - subsequence\_length + 1)$ subsequences are generated from the data sequence. 

@@ -8,7 +8,7 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 	wrong = zeros(11)
 	precision = zeros(11, float)
 
-	for testIndex in range(0, len(Xtest), len(Xtest)/300):
+	for testIndex in range(0, len(Xtest)):
 		#print('Processing %d/%d' % (testIndex, len(Xtest)))
 
 		nearestNeighbors = zeros((k,2), dtype=float)
