@@ -9,7 +9,7 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 	precision = zeros(11, float)
 
 	for testIndex in range(0, len(Xtest), len(Xtest)/300):
-		print('Processing %d/%d' % (testIndex, len(Xtest)))
+		#print('Processing %d/%d' % (testIndex, len(Xtest)))
 
 		nearestNeighbors = zeros((k,2), dtype=float)
 
@@ -19,7 +19,8 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 
 		for trainIndex in range(len(Xtrain)):
 			# normalize
-			Xtest[testIndex] -= (mean(Xtest[testIndex]) - mean(Xtrain[trainIndex]))
+			#Xtest[testIndex] -= (mean(Xtest[testIndex]) - mean(Xtrain[trainIndex]))
+
 			dist = linalg.norm(Xtest[testIndex]-Xtrain[trainIndex])
 
 			# Apply epsilon-ball
@@ -34,14 +35,14 @@ def knn(k, epsilon, Xtrain, Ytrain, Xtest, Ytest):
 				if numNeighbor == k:							
 					maxDist = nearestNeighbors[:,1].max()
 					maxIndex = argmax(nearestNeighbors[:,1]) 
-				#end if numNeighbor == 3:						
+				#end if numNeighbor == k:						
 			elif maxDist > dist:
 					nearestNeighbors[maxIndex,0] = Ytrain[trainIndex]
 					nearestNeighbors[maxIndex,1] = dist
 
 					maxDist = nearestNeighbors[:,1].max()
 					maxIndex = argmax(nearestNeighbors[:,1]) 								
-			#end if numNeighbor < 3:		
+			#end if numNeighbor < k:		
 		#end for trainIndex
 
 		'''

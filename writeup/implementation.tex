@@ -1,7 +1,7 @@
 \section{Implementation}
 \label{sec:implementation} 
 
-We describe a implementation of the side-channel attack on CPU usage statistics. 
+We describe an implementation of the side-channel attack on CPU usage statistics. 
 We implemented prototype application which monitors CPU usage statistics of other application running on an Android device.
 Our prototype application calls \term{top} system call periodically and generates an accumulated log of Netflix application running the device. 
 However, a target of monitoring is not confined to Netflix.
@@ -11,7 +11,7 @@ Each line of log consists of \term{pid}, \term{CPU usage}, \term{State}, \term{N
 
 \begin{figure}[!h]
 \centering
-\includegraphics[scale=0.35]{Figures/netflix_watcher_screenshot2}
+\includegraphics[scale=0.20]{Figures/netflix_watcher_screenshot2}
 \caption{Screenshot of prototype implementation}
 \label{fig:prototype_screenshot}
 \end{figure}
