@@ -6,7 +6,8 @@ The performance of the matching algorithm is measured by the rate of the number 
 R_{succ} = \frac{\#\: of \:correct\: predictions}{\# \:of\: total \:queries}
 \end{equation}
 
-The Table \ref{tab:succ_table} shows the success rate of the matching algorithm with varying query sequence length and varying DFT window size. It's obvious that the success rate increases as the length of query sequences goes large. As shown in the Table \ref{tab:succ_table}, the success rate increases as the sequence length increases when the size of DFT window is fixed. With the collected database sequences, our matching scheme gives the best prediction performance when the DFT window length is 200. However, it is impossible to apply DFT procedure with the window lenght 200 to query sequences that are shorter than DFT window length. Those entries in the Table are marked as non-applicable. 
+\subsubsection{Success Rate:} The Table \ref{tab:succ_table} shows the success rate of the matching algorithm with varying query sequence length and varying DFT window size. It's obvious that the success rate increases as the length of query sequences goes large. As shown in the Table \ref{tab:succ_table}, the success rate increases as the sequence length increases when the size of DFT window is fixed. With the collected database sequences, our matching scheme gives the best prediction performance when the DFT window length is 200. However, it is impossible to apply DFT procedure with the window lenght 200 to query sequences that are shorter than DFT window length. Those entries in the Table are marked as non-applicable. 
+
 
 \begin{table}[h!]
 \begin{center}
@@ -34,7 +35,7 @@ Seq Len ($l$) \textbackslash FFT Len ($w$)& 50 & 100 & 150 & 200 & 300
 \label{tab:succ_table}
 \end{table}
 
-The fast subsequence matching algorithm provides the result very fast in short execution time with considerable accuracy over 70\% when the DFT window length is 200. This efficiency comes from the fact that the algorithm exploits only the lowest two frequencies ($f=2$) of (sub-)sequences extracted by DFT to predict the title of the movie. However, the efficiency in the execution time compromises the certainty of our prediction. Thus, we define the certainty of the succerate as follows.
+\subsubsection{Confidence of Prediction:} The fast subsequence matching algorithm provides the result very fast in short execution time with considerable accuracy over 70\% when the DFT window length is 200. This efficiency comes from the fact that the algorithm exploits only the lowest two frequencies ($f=2$) of (sub-)sequences extracted by DFT to predict the title of the movie. However, the efficiency in the execution time compromises the certainty of our prediction. Thus, we define the certainty of the succerate as follows.
 \begin{equation}
 C = \frac{\#\: of \:correct\: query\: responses}{\# \:of\: total \:query\: responses}
 \end{equation}

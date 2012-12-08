@@ -1,3 +1,33 @@
 \subsection{Unified Algorithm Results}
 
 Unified algorithm here.
+
+\subsubsection{Execution Time:} The execution time of the fast subsequence matching algorithm is measured from pre-processing a query subsequence (i.e. smoothing, DFT, packing MBR) to assessing final query responses. The execution time is measured when the DFT window length is 150. The reason for the selection is that 1) the window length provides one of the best prediction results and 2) various sequence lengths can be tested. 
+The execution time of the KNN algorithm is measured after $n$ candidates filtered by the FSM are delivered to the KNN algorithm as the input parameters. In the experiment, the execution times of $n = [10, 4, n_{90}$ were measured where $n_{90}$ refers to the number of candidates that occupy 90\% of the total response from the FSM.
+
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|c|| c| c| c| c| }
+\hline
+Seq Len & Fast Subsequence Matching & KNN +FSM (n=10) & KNN + FSM (n=4) & KNN + FSM (90\%)
+\tabularnewline
+\hline
+180 & 1.70 & 33.24 & 16.75 & 16.92
+\tabularnewline
+240 & 1.74 & 32.32 & 16.31 & 17.16 
+\tabularnewline
+300 & 1.88 & 33.04 & 16.88 & 18.06 
+\tabularnewline
+600 & 2.13 & 28.85 & 15.36 & 17.77
+\tabularnewline
+900 & 2.48 & 24.43 & 13.86 & 15.95
+\tabularnewline
+1200 & 2.80 & 19.13 & 11.67 & 13.27
+\tabularnewline
+\hline
+\end{tabular}
+\end{center}
+\caption{Execution Time Measurement}
+\label{tab:exec_table}
+\end{table}
