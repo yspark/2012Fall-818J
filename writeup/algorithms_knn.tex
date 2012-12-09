@@ -1,24 +1,24 @@
 \subsection{K-Nearest Neighbor Algorithm}
 \label{sec:knn} 
 
-In order for CPU usage pattern matching, we adopted \term{k-nearest neighbor (KNN)} method, one of machine learning techniques widely used for pattern recognition.
-KNN is a supervised machine learning and therefore it requires \term{training data set} which is pre-collected CPU usage statistics of target movies, and \term{test data set} on which KNN method should make a prediction based on the training data set.
-If we give a unique class to each target movie, then our CPU usage pattern matching problem turns into classification problem. 
-Once training data set is built up,  KNN method classifies a given test data based on the training data set. 
+For CPU usage pattern matching, we adopt \term{K-Nearest Neighbor (KNN)} algorithm, one of machine learning techniques widely used for pattern recognition.
+KNN algorithm classifies \term{test data}  into one of pre-defined classes based on \term{training data}, which is a pre-built database. 
+The algorithm calculates the Euclidean distance between the test data and each instance in the training data and chooses $k$ nearest neighbors.
+Then the test data is classifies by a majority vote of $k$ nearest neighbors. 
 
-In our work, training data set and test data set consists of sequences of CPU usage measurements. 
-However, we need to pre-process both training data set and test data because they usually contain different number of CPU measurement.
-Practically, test data is collected from target users (or victims), and therefore we cannot expect that the length of test data is as long as that of our pre-built training data. 
-Since KNN method assumes that both training data and test data are of the same length, somehow we need to modify both training and test data so that they have the same length. 
-Therefore, we first need to define a length of subsequence and then divide test data and training data into several subsequences of the fixed length. 
-We need to handle cases where a user watches a movie only for a while or watches several movies in a row. 
-Therefore the subsequence length should be short enough since we cannot always expect that a user watches a movie for a long time using their mobile handset.  
-On the other hand, if the subsequence length is too short, KNN method may not classify the test data due to lack of the number of features. 
-Therefore, the subsequence length should be long enough so that test data can be successfully classified. 
-Experimental results according to the length of subsequence is shown later in \ref{sec:experiments}.
+In our work, training data is CPU usage statistics of target movies collected in advance by adversaries, and test data is CPU usage statistics collected through the side-channel attack application running on victim's device. 
+However, we need to pre-process both training data and test data because they usually contain different number of CPU measurement.
+Practically, test data is collected from victims, and therefore we cannot expect that the length of test data would be as long as that of our pre-built training data. 
+Since KNN method assumes that both training data and test data are of the same length, training data should be modified so that both training and test data have the same length.
+Therefore, once a query sequence of CPU usage statistics is given, each sequence in training data is divided into several subsequences of the same length. 
+
+Generally, the longer the length of query sequence is, the better KNN algorithm can classify since longer length is able to decrease the effect of noises contained in the test data.
+However, mobile device users may not watch a whole movie from the start to the end due to the property of mobile device.
+According to the research of UK's mobile service provider, O2, the average smartphone owners spend more than two hours each day using their smartphones but they only spend 9 minutes and 23 seconds for TV/Movie watching \cite{O2:2012}.
+Therefore we should assume that our side-channel attack application would be able to get CPU usage statistics of Netflix which may have the length of less than 10 minutes.
 
 In KNN method, a sequence of CPU usage measurements is considered as a vector and each CPU measurement is considered as a vector element. 
-Then each subsequence of training and test data can be considered as a vector in a high dimensional space and the \term{Euclidean distance} between a given test data and pre-built training data set can be calculated using the below equation: 
+Then each subsequence of training and test data can be considered as vectors in a high dimensional space and the \term{Euclidean distance} between a given test data and pre-built training data set can be calculated using the below equation: 
 
 \[
 d( \vec{tr}, \vec{te} ) = [ \sum_{i=1}^{D} (\vec{tr}_i - \vec{te}_i)^2  ]^{(1/2)}
@@ -26,15 +26,3 @@ d( \vec{tr}, \vec{te} ) = [ \sum_{i=1}^{D} (\vec{tr}_i - \vec{te}_i)^2  ]^{(1/2)
 where $\vec{tr}$ is a subsequence of training data, $\vec{te}$ is a subsequence of test data and $D$ corresponds to the length of subsequence. 
 Then we can identify $K$ nearest neighbors of the test data and then make a prediction based on the majority class of the identified neighbors. 
 
-
-
-
-
-
-\begin{comment}
-There exist a few other machine learning methods such as \term{Support Vector Machine} or \term{Perceptron}, they have couple of drawbacks when applied to our pattern matching problem: 
-
-(1) Features are not fixed 
-
-Consider a sequence of CPU usage values as a vector and then KNN tries to find out k nearest vectors 
-\end{comment}
