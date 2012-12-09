@@ -1,8 +1,8 @@
 \subsection{Integrated Algorithm Results}
 
-In this section, the two algorithms, the fast subsequence matching algorithm (FSM) and the KNN algorithm, are integrated to complement the weakness of the two algorithm, accuracy of the FSM and time efficiency of the KNN. The FSM algorithm filters the candidate database sequences of a query subsequence in short time, and hand the candidate movie sequences to the KNN algorithm. Then, the KNN algorithm is applied only to the candidate database sequences.
+In this section, the two algorithms, the fast subsequence matching algorithm (FSM) and the KNN algorithm, are integrated to complement the weakness of the two algorithm, accuracy of the FSM and time efficiency of the KNN. The FSM algorithm first selects the candidate database sequences for a query subsequence in short time, and the FSM hands the candidate movie sequences over to the KNN algorithm. Then, the KNN algorithm is applied only to the candidate database sequences. The integrated solution results in accurate as well as fast predictions as shown in the Table \ref{tab:succ_int_table} and \ref{tab:exec_table}
 
-\subsubsection{Success Rate:} To measure the success rate, the metric, $R_{succ}$, defined in the section 5.2. To assess the success rate of the integrated solution, the DFT window length is set to 150 and 200 where the FSM provides the best success rate. The KNN algorithm receives $n$ candidate movie sequences filtered by the FSM as the input parameters. In the experiment, the success rate of $n = [10, 4, n_{90}]$ were measured where $n_{90}$ refers to the number of candidates that occupy 90\% of the total response from the FSM.
+\subsubsection{Success Rate:} To measure the success rate, the metric, $R_{succ}$, defined in the section 5.2, is used. To assess the success rate of the integrated solution, the DFT window length is set to 150 and 200 where the FSM provides the best success rate. The KNN algorithm receives $n$ candidate movie sequences, that filtered by the FSM, as the input parameters. In the experiment, the success rate of $n = [10, 4, n_{90}]$ were measured where $n_{90}$ refers to the number of candidates that occupy 90\% of the total response in the FSM.
 
 \begin{table}[h!]
 \begin{center}
@@ -30,14 +30,10 @@ In this section, the two algorithms, the fast subsequence matching algorithm (FS
 \end{tabular}
 \end{center}
 \caption{Execution Time Measurement}
-\label{tab:exec_int_table}
+\label{tab:succ_int_table}
 \end{table}
 
-The Table \ref{tab:exec_int_table} shows the success rate of the integrated algorithm.
-
-\subsubsection{Execution Time:} The execution time of the fast subsequence matching algorithm is measured from pre-processing a query subsequence (i.e. smoothing, DFT, packing MBR) to assessing final query responses. The reason for the selection is that 1) the window length provides one of the best prediction results and 2) various sequence lengths can be tested. The exeuction time of the KNN is measured once the algorithm receives candidate movie sequences from the FSM algorithm. The Table \ref{tab:exec_table} shows the execution time of four cases when only FSM is used, and when the integrated solution is used for $n = [10, 4, n_{90}]$.
-
-
+\subsubsection{Execution Time:} The execution time of the FSM algorithm is measured from pre-processing a query subsequence (i.e. smoothing, DFT, packing MBR) to assessing final query responses. The exeuction time of the KNN is measured once the algorithm receives candidate movie sequences from the FSM algorithm. The Table \ref{tab:exec_table} shows the execution time of four cases when only FSM is used, and when the integrated solution is used for $n = [10, 4, n_{90}]$. In the Table \ref{tab:exec_table}, the unit of measured time is second and each number represents execution time required for handling 10 query subsequences.
 
 \begin{table}[h!]
 \begin{center}
@@ -64,3 +60,5 @@ Seq Len & Fast Subsequence Matching & KNN +FSM (n=10) & KNN + FSM (n=4) & KNN + 
 \caption{Execution Time Measurement}
 \label{tab:exec_table}
 \end{table}
+
+The Table \ref{tab:exec_table} shows that the FSM algorithm takes increasing execution time as the query subsequence length increases. When the query subsequence length is 600 (=10 min), the integrated algorithm predicts the correct movie title within around 15 seconds with more than 90 percent success rate. 
