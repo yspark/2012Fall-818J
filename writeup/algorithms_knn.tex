@@ -2,7 +2,7 @@
 \label{sec:knn} 
 
 For CPU usage pattern matching, we adopt \term{K-Nearest Neighbor (KNN)} algorithm, one of machine learning techniques widely used for pattern recognition.
-KNN algorithm classifies \term{test data}  into one of pre-defined classes based on \term{training data}, which is a pre-built database. 
+KNN algorithm classifies \term{test data} into one of pre-defined classes based on \term{training data}, which is a pre-built database. 
 The algorithm calculates the Euclidean distance between the test data and each instance in the training data and chooses $k$ nearest neighbors.
 Then the test data is classifies by a majority vote of $k$ nearest neighbors. 
 
@@ -12,7 +12,7 @@ Practically, test data is collected from victims, and therefore we cannot expect
 Since KNN method assumes that both training data and test data are of the same length, training data should be modified so that both training and test data have the same length.
 Therefore, once a query sequence of CPU usage statistics is given, each sequence in training data is divided into several subsequences of the same length. 
 
-Generally, the longer the length of query sequence is, the better KNN algorithm can classify since longer length is able to decrease the effect of noises contained in the test data.
+Generally, the longer the length of query sequence is the better KNN algorithm can classify since longer length is able to decrease the effect of noises contained in the test data.
 However, mobile device users may not watch a whole movie from the start to the end due to the property of mobile device.
 According to the research of UK's mobile service provider, O2, the average smartphone owners spend more than two hours each day using their smartphones but they only spend 9 minutes and 23 seconds for TV/Movie watching \cite{O2:2012}.
 Therefore we should assume that our side-channel attack application would be able to get CPU usage statistics of Netflix which may have the length of less than 10 minutes.
