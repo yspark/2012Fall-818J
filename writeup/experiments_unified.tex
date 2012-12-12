@@ -6,9 +6,9 @@ In this section, the two algorithms, the fast subsequence matching algorithm (FS
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|c| c| c| c| c| c| }
+\begin{tabular}{|c| >{\centering}m{0.7cm} | c| c| c| c| }
 \hline
-\multirow{3}{*}{Subsequence Length} & \multirow{3}{*}{KNN + FSM (n=10)} & \multicolumn{4}{c|}{FFT Length} \\
+\multirow{3}{*}{Subsequence Length} & \multirow{3}{*}{KNN} & \multicolumn{4}{c|}{FFT Length} \\
 \cline{3-6}
    & & \multicolumn{2}{c|}{150}  & \multicolumn{2}{c|}{200}\\
 \cline{3-6}
@@ -29,7 +29,7 @@ In this section, the two algorithms, the fast subsequence matching algorithm (FS
 \hline
 \end{tabular}
 \end{center}
-\caption{Execution Time Measurement}
+\caption{Success Rate of the Integrated Algorithm}
 \label{tab:succ_int_table}
 \end{table}
 
@@ -39,7 +39,7 @@ In this section, the two algorithms, the fast subsequence matching algorithm (FS
 \begin{center}
 \begin{tabular}{|c|| c| c| c| c| }
 \hline
-Seq Len & Fast Subsequence Matching & KNN +FSM (n=10) & KNN + FSM (n=4) & KNN + FSM (90\%)
+Seq Len & Fast Subsequence Matching & KNN & KNN + FSM (n=4) & KNN + FSM (90\%)
 \tabularnewline
 \hline
 180 & 1.70 & 33.24 & 16.75 & 16.92
