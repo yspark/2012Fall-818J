@@ -3,7 +3,7 @@ Query subsequences are chosen from a 30-min length sequence with varying startin
 
 The performance of the matching algorithm is measured by the rate of the number of correct predictions to the number of total queries.
 \begin{equation}
-R_{succ} = \frac{\#\: of \:correct\: predictions}{\# \:of\: total \:queries}
+R_{succ} = \frac{\#\: of \:correct\: predictions}{\# \:of\: total \:predictions}
 \end{equation}
 
 \subsubsection{Success Rate:} The Table \ref{tab:succ_table} shows the success rate of the matching algorithm with varying query sequence length and varying DFT window size. It's obvious that the success rate increases as the length of query sequences goes large. As shown in the Table \ref{tab:succ_table}, the success rate increases as the sequence length increases when the size of DFT window is fixed. With the collected database sequences, our matching scheme gives the best prediction performance when the DFT window length is 200. However, it is impossible to apply DFT procedure with the window lenght 200 to query sequences that are shorter than DFT window length. Those entries in the Table are marked as non-applicable. 
