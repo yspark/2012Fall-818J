@@ -38,11 +38,11 @@ Since each video stream consists of various types of scenes and a composition of
 	\vspace{-5mm}
 \end{figure}
 
-In order to make our study feasible, two fundamental conditions should be satisfied: 1) each MPEG video stream should show different and possibly unique CPU usage pattern and 2) repeated measurement on a MPEG video stream shoud show identical CPU usage statistics. 
-We collected CPU usage statistics of two popular movies serviced on Netflix and confirmed that our assumptions is proved to be correct.
-We used Samsung Galaxy S device with Android 2.3 and Netflix application running on the device. 
-Measurement interval was set to 5 seconds and we collected CPU usage statistics of first 30 minutes of each movie. 
-Per each movie, we repeated the measurement 5 times. 
+In order to make our study feasible, two fundamental conditions should be satisfied: 1) each MPEG video stream should show different and possibly unique CPU usage pattern and 2) repeated measurements on an MPEG video stream shoud show identical CPU usage statistics. 
+We collected CPU usage statistics of two popular movies serviced on Netflix and confirmed that our assumptions is correct.
+We used Samsung Galaxy S with Android 2.3 and Netflix application running on the device. 
+A measurement interval was set to 5 seconds and we collected CPU usage statistics of first 30 minutes of each movie. 
+Per each movie, we repeated the measurements 5 times. 
 The measurement result is shown in Figure \ref{fig:preliminaries}
 
 As shown in Figure \ref{fig:preliminaries}, 5 measurement results on a movie are almost identical in both cases. 
@@ -52,7 +52,7 @@ However, it is later shown by experiments that the existence of glitches would n
 
 It is also clear from Figure \ref{fig:preliminaries} that two different movies shows clearly different CPU usage statistics. 
 If we compare two measurement results using only a few measure points then it may not be easy to differentiate one movie from another.
-However if we use enough number of measure points, it would be possible to differentiate each movie from another with reasonably high accuracy. 
+However, if we use enough number of measure points, it would be possible to differentiate each movie from another with reasonably high accuracy. 
 
 \input{preliminaries_implementation} 
 

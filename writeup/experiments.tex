@@ -1,17 +1,17 @@
 \section{Experimental Results}
 \label{sec:experiments}
 
-We evaluate the performance of \term{fast subsequence matching} algorithm and \term{KNN} algorithm separately.
+We evaluate the performance of the \term{fast subsequence matching} algorithm and the \term{KNN} algorithm, separately.
 Then we evaluate the performance of the integrated algorithm which harmonizes the two algorithms. 
 
 \subsection{Experimental Setup}
 \label{sec:experimental_setup}
 
-\term{Samsung Galaxy S} device running \term{Android 2.3 Gingerbread} and \term{Netflix} application are used for our experiments. 
-10 movies are selected from \term{Popular on Netflix} section of Netflix website and the selected movies are shown in Table \ref{tab:movies}.
-CPU usage sequence of the movies are captured by recording CPU usage statistics in 1-second and 5-second intervals using the native UNIX/Android command, \term{top}, while playing the first 30 minutes of each movie. 
+The \term{Samsung Galaxy S} device running \term{Android 2.3 Gingerbread} and the \term{Netflix} application are used for our experiments. 
+10 movies are selected from the \term{Popular on Netflix} section of the Netflix website and the selected movies are shown in the Table \ref{tab:movies}.
+CPU usage sequences of the movies are captured by recording CPU usage statistics in 1-second and 5-second intervals using the native UNIX/Android command, \term{top}, while playing the first 30 minutes of each movie. 
 The measurement is repeated 5 times for each movie.
-Preliminary measurement results of two selected movies are previously shown in Figure \ref{fig:preliminaries}.
+The preliminary measurement results of two selected movies are previously shown in Figure \ref{fig:preliminaries}.
 
 \begin{table}[h!]
 \begin{center}
@@ -32,10 +32,10 @@ ID & Movie Title & ID & Movie Title \\
 \end{table}
 
 For each movie, one out of five raw sequences is selected as \term{query sequence} and the rest are considered \term{training sequences}.
-Then query sequence and training sequences are preprocessed both in fast subsequence matching algorithm and KNN algorithm. 
-In Fast subsequence matching algorithm, query sequence and training sequences are preprocessed and converted into space-series sequences separately through DFFT.
-Then query sequence is divided into several query subsequences and fast subsequence matching algorithm predicts the movie title of each query subsequence. 
-In KNN algorithm, query sequence is divided into several query subsequences and then training sequences are also divided into subsequences of the same length as query subsequences. 
+Then query sequence and training sequences are preprocessed both in the fast subsequence matching algorithm and the KNN algorithm. 
+In the fast subsequence matching algorithm, a query sequence and training sequences are preprocessed and converted into space-series sequences separately through DFFT.
+Then query sequence is divided into several query subsequences and the fast subsequence matching algorithm predicts the movie title of each query subsequence. 
+In KNN algorithm, a query sequence is divided into several query subsequences and then training sequences are also divided into subsequences of the same length as query subsequences. 
 Then KNN algorithm predicts the movie title of each query subsequence. 
 These procedures are depicted in Figure \ref{fig:train_test_set}.
 

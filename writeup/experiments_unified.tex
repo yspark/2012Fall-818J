@@ -2,7 +2,7 @@
 
 In this section, the two algorithms, the fast subsequence matching algorithm (FSM) and the KNN algorithm, are integrated to complement the weakness of the two algorithm, accuracy of the FSM and time efficiency of the KNN. The FSM algorithm first selects the candidate database sequences for a query subsequence in short time, and the FSM hands the candidate movie sequences over to the KNN algorithm. Then, the KNN algorithm is applied only to the candidate database sequences. The integrated solution results in accurate as well as fast predictions as shown in the Table \ref{tab:succ_int_table} and \ref{tab:exec_table}
 
-\subsubsection{Success Rate:} To measure the success rate, the metric, $R_{succ}$, defined in the section 5.2, is used. To assess the success rate of the integrated solution, the DFT window length is set to 150 and 200 where the FSM provides the best success rate. The KNN algorithm receives $n$ candidate movie sequences, that filtered by the FSM, as the input parameters. In the experiment, the success rate of $n = [10, 4, n_{90}]$ were measured where $n_{90}$ refers to the number of candidates that occupy 90\% of the total response in the FSM.
+\subsubsection{Success Rate:} To measure the success rate, the metric, $R_{succ}$, defined in the section 5.2, is used. To assess the success rate of the integrated solution, the DFT window length is set to 150 and 200 where the FSM provides the best success rate. The KNN algorithm receives $n$ candidate movie sequences, that filtered by the FSM, as the input parameters. In the experiment, the success rate of $n = [10, 4, n_{90}]$ were measured where $n_{90}$ refers to the candidates that occupy 90\% of the total response in the FSM.
 
 \begin{table}[h!]
 \begin{center}
